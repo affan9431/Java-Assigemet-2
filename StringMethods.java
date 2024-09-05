@@ -1,5 +1,5 @@
 /***
- * Question: Create a ten string function.
+ * Question: Create a Ten string function.
  * The available operations are listed below: Append, CountWords, Replace, isPalindrome, Splice, Split, MaxRepeatingCharacter, Sort, Shift, and Reverse.
  * Owner name: Affan Sayeed.
  * Date: 5-9-2024
@@ -9,46 +9,61 @@ import java.util.Scanner;
 class StringFunction {
     static String outputString = " ";
 
+
+    // Return maximum value by comparing two value
     public int maximum(int i, int j) {
-        return i > j ? i : j;
+        return Math.max(i, j);
     }
 
+    // append string in front of previous string
+    // String currentString = "Hello";
+    // append(" World"); Result: "Hello World"
+    //  append(" Java");  Result: "Hello World Java"
     public void append(String newString) {
         outputString += newString + " ";
-        System.out.println("Output String: " + outputString);
+        System.out.println(Constants.OUTPUT_STRING + outputString);
     }
 
+
+   // Count the word from the string
+   // String text = "Hello World from Codeup";
+   // int wordCount = countWords(); Result: 4
     public int countWords() {
-        Scanner sc = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         System.out.println(Constants.ENTER_STRING);
-        String str = sc.nextLine();
+        String inputString = input.nextLine();
         int count = 1;
 
-        for (int i = 0; i < str.length(); i++) {
-            if (str.charAt(i) == ' ') {
+        for (int i = 0; i < inputString.length(); i++) {
+            if (inputString.charAt(i) == ' ') {
                 count++;
             }
         }
         return count;
     }
 
+
+    // Check String is palindrome or not.
+    // String text = "madam";
+    // boolean isPal = isPalindrome(); Result: true
+
     public void isPalindrome() {
-        Scanner sc = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         System.out.println(Constants.ENTER_STRING);
 
-        String str = sc.nextLine().toLowerCase().replace(" ", "");
+        String inputString = input.nextLine().toLowerCase().replace(" ", "");
         char character;
         String output = "";
 
-        for (int i = 0; i < str.length(); i++) {
-            character = str.charAt(i);
+        for (int i = 0; i < inputString.length(); i++) {
+            character = inputString.charAt(i);
             output = character + output;
         }
 
-        if (str.equals(output)) {
-            System.out.println("Yes, it is palindrome.");
+        if (inputString.equals(output)) {
+            System.out.println(Constants.PALINDROME);
         } else {
-            System.out.println("No, it is not palindrome.");
+            System.out.println(Constants.NOT_A_PALINDROME);
         }
     }
 
@@ -69,7 +84,7 @@ class StringFunction {
             max = maximum(max, count);
         }
 
-        int idx = -1;
+        int index = -1;
         for (int i = 0; i < name.length() - 1; i++) {
             int count = 1;
             for (int j = i + 1; j < name.length(); j++) {
@@ -77,13 +92,13 @@ class StringFunction {
                     count++;
                 }
                 if (count == max) {
-                    idx = i;
+                    index = i;
                 }
             }
         }
 
-        if (idx != -1) {
-            System.out.println(name.charAt(idx) + " -> " + max);
+        if (index != -1) {
+            System.out.println(name.charAt(index) + " -> " + max);
         } else {
             System.out.println("No repeated characters found.");
         }
@@ -92,12 +107,12 @@ class StringFunction {
     public void replace(String string, String oldSubstring, String newSubstring) {
         String output = "";
         int i = 0;
-        int len = oldSubstring.length();
+        int length = oldSubstring.length();
 
-        while (i <= string.length() - len) {
-            if (string.substring(i, i + len).equals(oldSubstring)) {
+        while (i <= string.length() - length) {
+            if (string.substring(i, i + length).equals(oldSubstring)) {
                 output += newSubstring;
-                i += len;
+                i += length;
             } else {
                 output += string.charAt(i);
                 i++;
@@ -108,14 +123,14 @@ class StringFunction {
     }
 
     public String reverse() {
-        Scanner sc = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         System.out.println(Constants.ENTER_STRING);
-        String str = sc.nextLine();
+        String inputString = input.nextLine();
         char character;
         String reverseString = "";
 
-        for (int i = 0; i < str.length(); i++) {
-            character = str.charAt(i);
+        for (int i = 0; i < inputString.length(); i++) {
+            character = inputString.charAt(i);
             reverseString = character + reverseString;
         }
 
@@ -153,14 +168,14 @@ class StringFunction {
     }
 
     public void split(String string) {
-        String[] arr = new String[string.length()];
+        String[] outputArray = new String[string.length()];
         String output = "";
         int index = 0;
 
         for (int i = 0; i < string.length(); i++) {
             if (string.charAt(i) == ' ') {
                 if (!output.isEmpty()) {
-                    arr[index] = output;
+                    outputArray[index] = output;
                     index++;
                 }
                 output = "";
@@ -170,24 +185,24 @@ class StringFunction {
         }
 
         if (!output.isEmpty()) {
-            arr[index] = output;
+            outputArray[index] = output;
             index++;
         }
 
         for (int i = 0; i < index; i++) {
-            System.out.println(arr[i]);
+            System.out.println(outputArray[i]);
         }
         System.out.println("<---------->");
     }
 
-    public String shiftCharacters(String s, int index) {
-        int length = s.length();
+    public String shiftCharacters(String string, int index) {
+        int length = string.length();
         String output = "";
         for (int i = length - index; i < length; i++) {
-            output += s.charAt(i);
+            output += string.charAt(i);
         }
         for (int i = 0; i < length - index; i++) {
-            output += s.charAt(i);
+            output += string.charAt(i);
         }
 
         return output;
@@ -197,33 +212,33 @@ class StringFunction {
 public class StringMethods {
     public static void main(String[] args) {
         StringFunction stringFunction = new StringFunction();
-        Scanner sc = new Scanner(System.in);
-        String str = "";
+        Scanner input = new Scanner(System.in);
+        String inputString = "";
 
         boolean continueProgram = true;
 
         while (continueProgram) {
             System.out.println(Constants.ENTER_STRING);
-            str = sc.nextLine();
+            inputString = input.nextLine();
 
             System.out.println(Constants.SELECT_OPERATION);
 
-            if (!sc.hasNextInt()) {
+            if (!input.hasNextInt()) {
                 System.out.println(Constants.INVALID_INPUT);
-                sc.next();
+                input.next();
                 continue;
             }
 
-            int choice = sc.nextInt();
-            sc.nextLine();
+            int choice = input.nextInt();
+            input.nextLine();
 
             switch (choice) {
                 case 1:
-                    stringFunction.append(str);
+                    stringFunction.append(inputString);
                     break;
                 case 2:
                     int wordCount = stringFunction.countWords();
-                    System.out.println("Number of words: " + wordCount);
+                    System.out.println(Constants.NUMBER_OF_WORD+ wordCount);
                     break;
                 case 3:
                     stringFunction.isPalindrome();
@@ -235,40 +250,40 @@ public class StringMethods {
                     String oldSubstring, newSubstring;
 
                     System.out.println(Constants.ENTER_STRING);
-                    str = sc.nextLine();
+                    inputString = input.nextLine();
 
                     System.out.println(Constants.ENTER_CHARACTER_TO_REPLACE);
-                    oldSubstring = sc.nextLine();
+                    oldSubstring = input.nextLine();
 
                     System.out.println(Constants.ENTER_NEW_CHARACTER);
-                    newSubstring = sc.nextLine();
+                    newSubstring = input.nextLine();
 
-                    stringFunction.replace(str, oldSubstring, newSubstring);
+                    stringFunction.replace(inputString, oldSubstring, newSubstring);
                     System.out.println(Constants.EXIT_PROGRAM);
                     break;
                 case 6:
                     String reversedString = stringFunction.reverse();
-                    System.out.println("Reversed string: " + reversedString);
+                    System.out.println(Constants.REVERSE_STRING + reversedString);
                     break;
                 case 7:
-                    String sortedString = stringFunction.sort(str);
-                    System.out.println("Sorted string: " + sortedString);
+                    String sortedString = stringFunction.sort(inputString);
+                    System.out.println(Constants.SORTED_STRING + sortedString);
                     break;
                 case 8:
                     System.out.println(Constants.ENTER_START_INDEX);
-                    int startIndex = sc.nextInt();
+                    int startIndex = input.nextInt();
                     System.out.println(Constants.ENTER_LENGTH_TO_SPLICE);
-                    int length = sc.nextInt();
-                    stringFunction.splice(str, startIndex, length);
+                    int length = input.nextInt();
+                    stringFunction.splice(inputString, startIndex, length);
                     break;
                 case 9:
-                    stringFunction.split(str);
+                    stringFunction.split(inputString);
                     break;
                 case 10:
                     System.out.println(Constants.ENTER_START_INDEX);
-                    int start = sc.nextInt();
-                    String outputString = stringFunction.shiftCharacters(str, start);
-                    System.out.println("Output string: " + outputString);
+                    int start = input.nextInt();
+                    String outputString = stringFunction.shiftCharacters(inputString, start);
+                    System.out.println(Constants.OUTPUT_STRING + outputString);
                     break;
                 default:
                     System.out.println(Constants.INVALID_CHOICE);
@@ -276,9 +291,9 @@ public class StringMethods {
             }
 
             System.out.println(Constants.CONTINUE_PROGRAM);
-            String continueChoice = sc.nextLine().trim().toLowerCase();
+            String continueChoice = input.nextLine().trim().toLowerCase();
 
-            if (!continueChoice.equals("yes")) {
+            if (!continueChoice.equals(Constants.YES)) {
                 continueProgram = false;
                 System.out.println(Constants.EXIT_PROGRAM);
             }
